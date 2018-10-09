@@ -27,17 +27,16 @@ int sumBetweenZeros(int array[], Zeros zero) {
 		return sum;
 	}
 	else {
-		return 10; //because array elements are equal [-9..9]
+		return 81; //because max sum = [0 ..8*10..0] = 80
 	}
 }
 
 void sortArray(int array[], int const size) {
-	int i, j;
 	bool swapped;
-	for (i = 0; i < size - 1; i++)
+	for (int i = 0; i < size - 1; i++)
 	{
 		swapped = false;
-		for (j = 0; j < size - i - 1; j++)
+		for (int j = 0; j < size - i - 1; j++)
 		{
 			if ((array[j] < 0)&&(array[j + 1] >= 0))
 			{

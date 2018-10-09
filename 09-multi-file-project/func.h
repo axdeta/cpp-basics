@@ -6,6 +6,7 @@
 
 using std::cout;
 using std::endl;
+
 //store index values of zero elements
 struct Zeros {
 	int last = -1;
@@ -13,19 +14,19 @@ struct Zeros {
 };
 
 //the product of elements with even indices
-int productEvenIndex(int array[], int size);
+int productEvenIndex(int array[], int const size);
 
 //cout << array
-void printArray(int array[], int size);
+void printArray(int array[], int const size);
 
 //sorting array
-void sortArray(int array[], int size);
+void sortArray(int array[], int const size);
 
 //sum between first and last Zeros in array
 int sumBetweenZeros(int array[], Zeros zero);
 
 //find the first and last Zeros
-Zeros findZeros(int array[], int size);
+Zeros findZeros(int array[], int const size);
 
 //generation array
-void genrateArray(int array[], int size);
+void genrateArray(int array[], int const size);

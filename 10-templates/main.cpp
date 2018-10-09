@@ -37,11 +37,10 @@ void printArr(Type a) {
 
 template <class Type>
 int findZeros(Type a) {
-	double const EPS = 0.000000000000001;
 	int columns_with_zeros = 0;
 	for (int j = 0; j < Col; j++) {
 		for (int i = 0; i < Row; i++) {
-			if (abs(a[i][j]) < EPS) {
+			if (abs(a[i][j]) < 1e-15) {
 				columns_with_zeros += 1;
 				break;
 			}
@@ -98,7 +97,7 @@ void start(string name) {
 }
 
 int main() {
-	eror:
+	error:
 	cout << "Select the data type (0-integer, 1-double, 2-float): ";
 	string select;
 	cin >> select;
@@ -113,7 +112,7 @@ int main() {
 	}
 	else {
 		cout << "Error input! (Only 0/1/2)" << endl;
-		goto eror;
+		goto error;
 	}
 	return 0;
 }
