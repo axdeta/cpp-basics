@@ -1,77 +1,86 @@
-#include "Header.h"
+#include "func.h"
 
-zeros findZeros(int array[], int size) {
-	zeros zero;
-	//find zeros
+Zeros findZeros(int array[], int const size) {
+	Zeros zero;
+	//find Zeros
 	for (int i = 0; i < size; i++) {
 		if (array[i] == 0) {
-			zero.First = i;
+			zero.first = i;
 			break;
 		}
 	}
-	for (int i = size - 1; i > -1; i--) {
+	for (int i = size - 1; i >= 0; i--) {
 		if (array[i] == 0) {
-			zero.Last = i;
+			zero.last = i;
 			break;
 		}
 	}
 	return zero;
 }
 
-string sumBetweenZeros(int array[], zeros zero) {
-	if (zero.First != zero.Last) {
+int sumBetweenZeros(int array[], Zeros zero) {
+	if (zero.first != zero.last) {
 		int sum = 0;
 
-		for (int i = zero.First + 1; i < zero.Last; i++)
+		for (int i = zero.first + 1; i < zero.last; i++)
 			sum += array[i];
-		return to_string(sum);
+		return sum;
 	}
 	else {
-		return "Error : array has less than two zeros";
+		return 10; //because array elements are equal [-9..9]
 	}
 }
 
-void sortArray(int array[], int size) {
-	for (int i = 0; i < size - 1; i++) {
-		for (int j = 0; j < size - i - 1; j++) {
-			if ((array[j] < 0)&(array[j + 1] >= 0)) {
-				swap(array[j], array[j + 1]);
+void sortArray(int array[], int const size) {
+	int i, j;
+	bool swapped;
+	for (i = 0; i < size - 1; i++)
+	{
+		swapped = false;
+		for (j = 0; j < size - i - 1; j++)
+		{
+			if ((array[j] < 0)&&(array[j + 1] >= 0))
+			{
+				std::swap(array[j], array[j + 1]);
+				swapped = true;
 			}
 		}
+
+		if (swapped == false)
+			break;
 	}
 }
 
-void printArray(int array[], int size) {
-	cout << string(61, '-') << endl;
-	cout << "|";
+void printArray(int array[], int const size) {
+	std::cout << std::string(61, '-') << std::endl;
+	std::cout << "|";
 
 	for (int i = 0; i < size; i++) {
-		cout << setw(2) << "[" << i << "]" << setw(2) << "|";
+		std::cout << std::setw(2) << "[" << i << "]" << std::setw(2) << "|";
 	}
 
-	cout << "<- Index";
-	cout << endl << string(61, '-') << endl << "|";
+	std::cout << "<- Index";
+	std::cout << std::endl << std::string(61, '-') << std::endl << "|";
 
 	for (int i = 0; i < size; i++) {
-		cout << setw(3) << array[i] << setw(3) << "|";
+		std::cout << std::setw(3) << array[i] << std::setw(3) << "|";
 	}
 
-	cout << "<- array[i]";
-	cout << endl;
-	cout << string(61, '-') << endl;
-	cout << endl;
+	std::cout << "<- array[i]";
+	std::cout << std::endl;
+	std::cout << std::string(61, '-') << std::endl;
+	std::cout << std::endl;
 }
 
-int productEvenIndex(int array[], int size) {
+int productEvenIndex(int array[], int const size) {
 	int product = array[0];
 	for (int i = 2; i < size; i += 2)
 		product *= array[i];
 	return product;
 }
 
-int* generationArray(int array[], int size) {
+void genrateArray(int array[], int const size) {
 	srand((unsigned)time(NULL));
 	for (int i = 0; i < size; i++)
 		array[i] = int(pow(-1, rand() % 2))*(rand() % 10); //[-9..9]
-	return array;
 }

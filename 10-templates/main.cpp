@@ -1,22 +1,21 @@
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <fstream>
-#include <cstring>
-#include <float.h>
+#include <iostream> //Input/Output 
+#include <iomanip> //setw()
+#include <fstream> //file input
+#include <string> //for input string
 
-#define N 3
+#define Row 3
+#define Col 4
 
 using namespace std;
 
 template <class Type>
-void readArr(Type *a, string name) {
+void readArr(Type a, string name) {
 	ifstream fin(name + ".txt");
 	if (!fin.is_open()) {
 		cout << "can't open file" << endl;
 	}
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Col; j++) {
 			fin >> a[i][j];
 		}
 	}
@@ -26,9 +25,9 @@ void readArr(Type *a, string name) {
 template <class Type>
 void printArr(Type a) {
 	cout << "Array: " << endl;
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < Row; i++) {
 		cout << "|";
-		for (int j = 0; j < N; j++) {
+		for (int j = 0; j < Col; j++) {
 			cout << setw(3) << a[i][j] << setw(2) << "|";
 		}
 		cout << endl;
@@ -37,74 +36,84 @@ void printArr(Type a) {
 }
 
 template <class Type>
-void findZeros(Type a) {
+int findZeros(Type a) {
+	double const EPS = 0.000000000000001;
 	int columns_with_zeros = 0;
-	for (int j = 0; j < N; j++) {
-		for (int i = 0; i < N; i++) {
-			if (abs(a[i][j]) < DBL_EPSILON) {
+	for (int j = 0; j < Col; j++) {
+		for (int i = 0; i < Row; i++) {
+			if (abs(a[i][j]) < EPS) {
 				columns_with_zeros += 1;
 				break;
 			}
 		}
 	}
-	cout << "Columns with zeros in aay: ";
-	cout << columns_with_zeros << endl << endl;
+	return columns_with_zeros;
 }
 
 template <class Type>
-void seriesZeros(Type a) {
+int seriesZeros(Type a) {
 	int max_series_col = 1,
 		series_now = 1,
 		row_of_max_series = -1;
 	//find series of identical elements in rows
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N - 1; j++) {
+	for (int i = 0; i < Row; i++) {
+		for (int j = 0; j < Col - 1; j++) {
 			//incrementing series_now if finds identical neighbors
 			if (a[i][j] == a[i][j + 1]) {
 				series_now += 1;
 			}
 		}
-		//check for find max of series 
+		//checking for the max series 
 		if (series_now > max_series_col) {
 			max_series_col = series_now;
 			row_of_max_series = i;
 		}
 		series_now = 1;
 	}
-	cout << "Row with max series identical neighbors: ";
-	if (row_of_max_series == -1) {
-		cout << "In all no identical neighbors" << endl;
-	}
-	else {
-		cout << row_of_max_series;
-		cout << "  (numbering starts at 0)" << endl;
-	}
+	return row_of_max_series;
 }
 
 template <class TypeAr>
 void start(string name) {
-	TypeAr a[N][N];
+	TypeAr a[Row][Col];
+	//reading and print array
 	readArr(a, name);
 	printArr(a);
-	findZeros(a);
-	seriesZeros(a);
+
+	//find columns with zeros in array
+	cout << "Columns with zeros in array: ";
+	cout << findZeros(a) << endl << endl;
+	
+	//find row with max series
+	int max_series = seriesZeros(a);
+	cout << "Row with max series identical neighbors: ";
+	if (max_series == -1) {
+		cout << "In all no identical neighbors" << endl;
+	}
+	else {
+		cout << max_series;
+		cout << "  (numeration starts at 0)" << endl;
+	}
+	
 }
 
 int main() {
-	cout << "Select the data type (0 -integer, 1- double, 2 -float): ";
-	int select;
+	eror:
+	cout << "Select the data type (0-integer, 1-double, 2-float): ";
+	string select;
 	cin >> select;
-	if (select == 0) {
+	if (select == "0") {
 		start<int>("int");
 	}
-	else if (select == 1) {
+	else if (select == "1") {
 		start<double>("double");
 	}
-	else if (select == 2) {
+	else if (select == "2") {
 		start<float>("float");
 	}
 	else {
 		cout << "Error input! (Only 0/1/2)" << endl;
+		goto eror;
 	}
 	return 0;
 }
