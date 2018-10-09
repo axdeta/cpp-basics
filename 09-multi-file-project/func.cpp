@@ -52,24 +52,24 @@ void sortArray(int array[], int const size) {
 }
 
 void printArray(int array[], int const size) {
-	std::cout << std::string(61, '-') << std::endl;
-	std::cout << "|";
+	cout << std::string(61, '-') << endl;
+	cout << "|";
 
 	for (int i = 0; i < size; i++) {
-		std::cout << std::setw(2) << "[" << i << "]" << std::setw(2) << "|";
+		cout << std::setw(2) << "[" << i << "]" << std::setw(2) << "|";
 	}
 
-	std::cout << "<- Index";
-	std::cout << std::endl << std::string(61, '-') << std::endl << "|";
+	cout << "<- Index";
+	cout << endl << std::string(61, '-') << endl << "|";
 
 	for (int i = 0; i < size; i++) {
-		std::cout << std::setw(3) << array[i] << std::setw(3) << "|";
+		cout << std::setw(3) << array[i] << std::setw(3) << "|";
 	}
 
-	std::cout << "<- array[i]";
-	std::cout << std::endl;
-	std::cout << std::string(61, '-') << std::endl;
-	std::cout << std::endl;
+	cout << "<- array[i]";
+	cout << endl;
+	cout << std::string(61, '-') << endl;
+	cout << endl;
 }
 
 int productEvenIndex(int array[], int const size) {

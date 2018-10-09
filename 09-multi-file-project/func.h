@@ -4,6 +4,8 @@
 #include <iomanip> //std::setw()
 #include <string> //string()
 
+using std::cout;
+using std::endl;
 //store index values of zero elements
 struct Zeros {
 	int last = -1;
@@ -13,7 +15,7 @@ struct Zeros {
 //the product of elements with even indices
 int productEvenIndex(int array[], int size);
 
-//std::cout << array
+//cout << array
 void printArray(int array[], int size);
 
 //sorting array

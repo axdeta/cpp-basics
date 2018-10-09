@@ -9,21 +9,21 @@ int main()
 	genrateArray(array, kArraySize);
 	printArray(array, kArraySize);
 
-	std::cout << "Product even index elements: ";
-	std::cout << productEvenIndex(array, kArraySize) << std::endl;
-	std::cout << std::endl;
+	cout << "Product even index elements: ";
+	cout << productEvenIndex(array, kArraySize) << endl;
+	cout << endl;
 
 	Zeros zero = findZeros(array, kArraySize);
-	std::cout << "Sum between Zeros: ";
+	cout << "Sum between Zeros: ";
 	int result_sum = sumBetweenZeros(array, zero);
 	if (result_sum != 10)
-		std::cout << result_sum << std::endl;
+		cout << result_sum << endl;
 	else
-		std::cout << "Error : array has less than two zeros" << std::endl;
-	std::cout << std::endl;
+		cout << "Error : array has less than two zeros" << endl;
+	cout << endl;
 
 	sortArray(array, kArraySize);
-	std::cout << "Sorted array:" << std::endl;
+	cout << "Sorted array:" << endl;
 	printArray(array, kArraySize);
 
 	return 0;
