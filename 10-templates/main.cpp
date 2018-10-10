@@ -93,7 +93,6 @@ void start(string name) {
 		cout << max_series;
 		cout << "  (numeration starts at 0)" << endl;
 	}
-	
 }
 
 int main() {
