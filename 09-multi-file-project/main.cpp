@@ -20,7 +20,7 @@ int main()
 		cout << result_sum << endl;
 	}
 	else
-		cout << "Error : array has less than two zeros" << endl;
+		cout << "Error: array has less than two zeros" << endl;
 	cout << endl;
 
 	sortArray(array, kArraySize);
