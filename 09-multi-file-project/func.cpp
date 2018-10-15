@@ -19,16 +19,10 @@ Zeros findZeros(int array[], int const size) {
 }
 
 int sumBetweenZeros(int array[], Zeros zero) {
-	if (zero.first != zero.last) {
-		int sum = 0;
-
-		for (int i = zero.first + 1; i < zero.last; i++)
-			sum += array[i];
-		return sum;
-	}
-	else {
-		return 81; //because max sum = [0 ..8*10..0] = 80
-	}
+	int sum = 0;
+	for (int i = zero.first + 1; i < zero.last; i++)
+		sum += array[i];
+	return sum;
 }
 
 void sortArray(int array[], int const size) {

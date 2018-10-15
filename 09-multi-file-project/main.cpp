@@ -15,9 +15,10 @@ int main()
 
 	Zeros zero = findZeros(array, kArraySize);
 	cout << "Sum between Zeros: ";
-	int result_sum = sumBetweenZeros(array, zero);
-	if (result_sum != 81)
+	if (zero.first != zero.last) {
+		int result_sum = sumBetweenZeros(array, zero);
 		cout << result_sum << endl;
+	}
 	else
 		cout << "Error : array has less than two zeros" << endl;
 	cout << endl;
