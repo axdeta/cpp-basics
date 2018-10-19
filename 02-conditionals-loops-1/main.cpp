@@ -4,71 +4,72 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
 	const double kEps = 1e-15;
 
-	double a, b, c, x1, x2, dx;
+	double a, b, c, xn, xk, dx;
 	cout << "Enter a -> ";
 	cin >> a;
 	cout << "Enter b -> ";
 	cin >> b;
 	cout << "Enter c -> ";
 	cin >> c;
-	cout << "Enter x1 -> ";
-	cin >> x1;
-	cout << "Enter x2 -> ";
-	cin >> x2;
-	cout << "Enter dx -> ";
+	cout << "Enter xn -> ";
+	cin >> xn;
+	cout << "Enter xk (xk >= xn) -> ";
+	cin >> xk;
+	cout << "Enter dx (dx > 0) -> ";
 	cin >> dx;
 
-	if (dx < kEps) cout << "Error dx";
-	else
-	{
+	if (dx <= 0) {
+		cout << "\nInvalid dx. Must be: dx > 0.\n";
+	}
+	else if (xn > xk) {
+		cout << "\nInvalid xk. Must be: xk >= xn.\n";
+	}
+	else {
 		cout << string(37, '-') << endl;
-		cout << "|        X        |        F        |" << endl;
+		cout << "|        X        |        F        |\n";
 		cout << string(37, '-') << endl;
 
 		cout << fixed;
 		cout.precision(3);
 
-		double f;
-		while (x1 <= x2)
-		{
-			cout << "|" << setw(11) << x1 << setw(7) << "|";
+		while (xn <= xk) {
+			cout << "|" << setw(11) << xn << setw(7) << "|";
 
-			if ((a < 0) and (abs(c) > kEps))
-			{
-				f = a * x1 * x1 + b * x1 + c;
+			double f;
+			if ((a < 0) && !(abs(c) < kEps)) {
+				f = a * xn * xn + b * xn + c;
 			}
-			else if ((a > 0) and (abs(c) < kEps))
-			{
-				if (!(abs(x1 - c) < kEps))
-				{
-					f = -a / (x1 - c);
-				}
-				else
-				{
-					cout << "  division by 0  |" << endl;
-					x1 += dx;
+			else if ((a > 0) && (abs(c) < kEps)) {
+				if (abs(xn - c) < kEps) {
+					cout << "  division by 0  |\n";
+					xn += dx;
 					continue;
 				}
+				else {
+					f = -a / (xn - c);
+				}
 			}
-			else
-			{
-				f = a * (x1 + c);
+			else {
+				f = a * (xn + c);
 			}
+
+			int ac = static_cast<int>(a);
+			int bc = static_cast<int>(b);
+			int cc = static_cast<int>(c);
 
 			cout << setw(11);
-			if ((int(a) & (int(b) | int(c))) != 0)
+			if ((ac & (bc | cc)) != 0)
 				cout << f;
 			else
-				cout << int(f);
-			cout << setw(7) << "|" << endl;
+				cout << static_cast<int>(f);
+			cout << setw(8) << "|\n";
 
-			x1 += dx;
+			xn += dx;
 		}
-		cout << string(37, '-') << endl;
+		cout << string(37, '-');
 	}
 	return 0;
 }
